@@ -45,6 +45,41 @@ final class AppVersionMonitorSwiftUITests: XCTestCase {
         XCTAssertEqual(appVersionMonitorStatus, .updateAvailable)
     }
 
+    // MARK: All versions are 2 digit
+
+    func testUpdateUnavailableEqualVersionsTwoDigit() async throws {
+        let currentVersion = "10.10.10"
+        let itunesVersion = "10.10.10"
+
+        let apiClientMock = APIClientMock(itunes: .init(results: [.init(version: itunesVersion)]))
+        let currentVersionMock = CurrentVersionMock(version: currentVersion)
+        let appVersionMonitorStatus = await AppVersionMonitorSwiftUI.appVersionMonitor(apiClient: apiClientMock, currentVersion: currentVersionMock, id: 12345)
+
+        XCTAssertEqual(appVersionMonitorStatus, .updateUnavailable)
+    }
+
+    func testUpdateUnavailableCurrentVersionGreaterTwoDigit() async throws {
+        let currentVersion = "11.11.11"
+        let itunesVersion = "10.10.10"
+
+        let apiClientMock = APIClientMock(itunes: .init(results: [.init(version: itunesVersion)]))
+        let currentVersionMock = CurrentVersionMock(version: currentVersion)
+        let appVersionMonitorStatus = await AppVersionMonitorSwiftUI.appVersionMonitor(apiClient: apiClientMock, currentVersion: currentVersionMock, id: 12345)
+
+        XCTAssertEqual(appVersionMonitorStatus, .updateUnavailable)
+    }
+
+    func testUpdateAvailableCurrentVersionLessTwoDigit() async throws {
+        let currentVersion = "10.10.10"
+        let itunesVersion = "11.11.11"
+
+        let apiClientMock = APIClientMock(itunes: .init(results: [.init(version: itunesVersion)]))
+        let currentVersionMock = CurrentVersionMock(version: currentVersion)
+        let appVersionMonitorStatus = await AppVersionMonitorSwiftUI.appVersionMonitor(apiClient: apiClientMock, currentVersion: currentVersionMock, id: 12345)
+
+        XCTAssertEqual(appVersionMonitorStatus, .updateAvailable)
+    }
+
     // MARK: Major version only 2 digits
 
     func testUpdateUnavailableEqualVersionsTwoDigitMajor() async throws {
@@ -149,7 +184,6 @@ final class AppVersionMonitorSwiftUITests: XCTestCase {
 
         XCTAssertEqual(appVersionMonitorStatus, .updateAvailable)
     }
-
 
     // MARK: Invalid VersionFormat
 
