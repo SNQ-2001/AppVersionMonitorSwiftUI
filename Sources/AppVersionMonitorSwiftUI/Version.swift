@@ -38,7 +38,7 @@ extension Version: CustomStringConvertible {
 }
 
 extension Version: Comparable {
-    static func < (lhs: AppVersion, rhs: AppVersion) -> Bool {
+    static func < (lhs: Version, rhs: Version) -> Bool {
         lhs.major < rhs.major ||
             lhs.major == rhs.major && lhs.minor < rhs.minor ||
             lhs.major == rhs.major && lhs.minor == rhs.minor && lhs.patch < rhs.patch
