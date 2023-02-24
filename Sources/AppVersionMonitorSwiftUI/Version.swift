@@ -20,7 +20,7 @@ struct Version {
     }
 
     init?(_ string: String) {
-        let pattern = #"(\d)\.(\d)\.(\d)"#
+        let pattern = #"([0-9]+)\.([0-9]+)\.([0-9]+)"#
         let versions = string.match(pattern)
             .compactMap(Int.init)
         guard versions.count == 3 else { return nil }

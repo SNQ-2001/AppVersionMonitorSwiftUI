@@ -11,8 +11,8 @@ import Foundation
 public enum AppVersionMonitorError: Error, LocalizedError {
     case invalidURL
     case invalidID
+    case invalidVersionFormat
     case networkError
-    case parseError
     case unknown
 
     public var errorDescription: String? {
@@ -21,10 +21,10 @@ public enum AppVersionMonitorError: Error, LocalizedError {
             return "The provided URL is invalid."
         case .invalidID:
             return "The provided ID is invalid."
+        case .invalidVersionFormat:
+            return "The specified version format is invalid. Please use Semantic Versioning format."
         case .networkError:
             return "An error occurred while attempting to access the network."
-        case .parseError:
-            return "An error occurred while attempting to parse the data."
         case .unknown:
             return "An unknown error occurred."
         }
