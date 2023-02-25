@@ -22,6 +22,8 @@ You can also clone the repository and build the library locally.
 
 ## How to use ?
 ```swift
+import AppVersionMonitorSwiftUI
+
 VStack {
 
 }
