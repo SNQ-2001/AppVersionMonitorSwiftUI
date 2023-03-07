@@ -7,7 +7,7 @@ let package = Package(
     name: "AppVersionMonitorSwiftUI",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_13),
+        .macOS(.v10_15),
         .tvOS(.v11),
         .watchOS(.v5)
     ],
